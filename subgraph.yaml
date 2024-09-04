@@ -1,0 +1,48 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: GhoToken
+    network: mainnet
+    source:
+      address: "0x40D16FC0246aD3160Ccc09B8D0D3A2cD28aE6C2f"
+      abi: GhoToken
+      startBlock: 17698470
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - FacilitatorAdded
+        - FacilitatorBucketCapacityUpdated
+        - FacilitatorBucketLevelUpdated
+        - FacilitatorRemoved
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+        - Transfer
+      abis:
+        - name: GhoToken
+          file: ./abis/GhoToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: FacilitatorAdded(indexed address,indexed bytes32,uint256)
+          handler: handleFacilitatorAdded
+        - event: FacilitatorBucketCapacityUpdated(indexed address,uint256,uint256)
+          handler: handleFacilitatorBucketCapacityUpdated
+        - event: FacilitatorBucketLevelUpdated(indexed address,uint256,uint256)
+          handler: handleFacilitatorBucketLevelUpdated
+        - event: FacilitatorRemoved(indexed address)
+          handler: handleFacilitatorRemoved
+        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
+          handler: handleRoleAdminChanged
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/gho-token.ts
