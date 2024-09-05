@@ -1,6 +1,11 @@
+type Indexer @entity {
+  id: String!
+  currentIndex: Int!
+}
 
 type Transfer @entity(immutable: true) {
   id: Bytes!
+  transferIndex: Int!
   from: Bytes! # address
   to: Bytes! # address
   value: BigInt! # uint256
