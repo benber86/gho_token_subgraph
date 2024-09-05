@@ -9,6 +9,10 @@ type Transfer @entity(immutable: true) {
   from: Bytes! # address
   to: Bytes! # address
   value: BigInt! # uint256
+  totalVariableDebt: BigInt!
+  variableBorrowRate: BigInt!
+  borrowCap: BigInt!
+  supplyCap: BigInt!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
